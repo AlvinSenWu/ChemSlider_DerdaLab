@@ -1,0 +1,65 @@
+.slide {
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .slide-title{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .right-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 45px;
+    color: #000000;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .left-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 45px;
+    color: #000000;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .slider {
+    position: relative;
+    height: 100%;
+    /* transform: scale(.5); */
+    background-size: 10px;
+
+  }
+  
+  .dots-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .dot {
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /* Set the hover effect for the dots */
+  .dot:hover {
+    background-color: lightblue;
+  }
+  
+  /* this doesn't work */
+  /* Set the active dot color */
+  .dots-container .dot:nth-child(current_slide) {
+    background-color: blue;
+  }
+  
