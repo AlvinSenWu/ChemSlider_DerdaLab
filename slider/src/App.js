@@ -5,8 +5,8 @@ import { getSlides } from "./slidesData"; // Import the slides images
 
 const App = () => {
   const containerStyles = {
-    width: "800px",
-    height: "600px",
+    width: "600px",
+    height: "500px",
     margin: "0 auto",
   };
 
