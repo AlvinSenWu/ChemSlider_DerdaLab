@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/imageslider.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const ImageSlider = ({ slides }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   // sliding back
   const goToPrevious = () => {
@@ -22,12 +24,26 @@ const ImageSlider = ({ slides }) => {
     setCurrentIndex(slideIndex);
   };
   
-  const slideStylesWidthBackground = {
-    backgroundImage: `url(${slides[currentIndex].url})`,
-  };
+  // const slideStylesWidthBackground = {
+  //   backgroundImage: `url(${slides[currentIndex].url})`,
+  // };
+
+  const handleChange = (e) => {
+    const usr = Number(e.target.value);
+    if (e.target.value === "") {
+      setCurrentIndex();
+    } else if (usr<1) {
+      setCurrentIndex(0);
+    } else if (usr>slides.length) {
+      setCurrentIndex(slides.length-1);
+    } else {
+      setCurrentIndex(usr-1);
+    }
+  }
+
 
   return (
-    <div className="slider">
+    <div className="imageSlider">
       <div>
         <div onClick={goToPrevious} className="left-arrow">
           ❰
@@ -36,20 +52,20 @@ const ImageSlider = ({ slides }) => {
           ❱
         </div>
       </div>
-      <div className="slide" style={slideStylesWidthBackground}></div>
-      <div className="slide-title">{slides[currentIndex].title}</div>
-      <div className="dots-container">
-        {slides.map((slide, slideIndex) => (
-          <div
-            className={`dot ${currentIndex === slideIndex ? 'active' : ''}`}
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-          >
-            ●
-          </div>
-        ))}
+      <div className="slider">
+        {/* <div className="slide" style={slideStylesWidthBackground}></div> */}
+        <img className="slide" src={slides[currentIndex]?.url} alt="" />
+        <div className="slide-title">{slides[currentIndex]?.title}</div>
+        <div className="page-container">
+          <input 
+            className="page-input"
+            maxLength={5}
+            type="number"
+            value={currentIndex+1}
+            onChange={(e) => handleChange(e)}
+          />/{slides.length}
+        </div>
       </div>
-      {/* <div className="slide-title">{slides[currentIndex].title}</div> */}
     </div>
   );
 };
