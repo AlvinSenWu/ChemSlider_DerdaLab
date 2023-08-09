@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./styles/imageslider.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
 
   // sliding back
   const goToPrevious = () => {
@@ -20,9 +21,11 @@ const ImageSlider = ({ slides }) => {
     setCurrentIndex(newIndex);
   };
   
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
+
+  // dont need this anymore, maybe need in future?
+  // const goToSlide = (slideIndex) => {
+  //   setCurrentIndex(slideIndex);
+  // };
   
   // const slideStylesWidthBackground = {
   //   backgroundImage: `url(${slides[currentIndex].url})`,
@@ -41,29 +44,46 @@ const ImageSlider = ({ slides }) => {
     }
   }
 
+  const handleSearchChange = (e) => {
+    const usr = e.target.value;
+    setSearchInput(usr);
+    if (usr === "") return;
+    for (let i=0; i<slides.length; i++) {
+      if (usr === slides[i].title) setCurrentIndex(i);
+    }
+  }
 
   return (
     <div className="imageSlider">
-      <div>
-        <div onClick={goToPrevious} className="left-arrow">
-          ❰
+      <input 
+        className="search-input"
+        // maxLength={5}
+        // type="number"
+        value={searchInput}
+        onChange={(e) => handleSearchChange(e)}
+      />
+      <div className="slider-content">
+        <div>
+          <div onClick={goToPrevious} className="left-arrow">
+            ❰
+          </div>
+          <div onClick={goToNext} className="right-arrow">
+            ❱
+          </div>
         </div>
-        <div onClick={goToNext} className="right-arrow">
-          ❱
-        </div>
-      </div>
-      <div className="slider">
-        {/* <div className="slide" style={slideStylesWidthBackground}></div> */}
-        <img className="slide" src={slides[currentIndex]?.url} alt="" />
-        <div className="slide-title">{slides[currentIndex]?.title}</div>
-        <div className="page-container">
-          <input 
-            className="page-input"
-            maxLength={5}
-            type="number"
-            value={currentIndex+1}
-            onChange={(e) => handleChange(e)}
-          />/{slides.length}
+        <div className="slider">
+          {/* <div className="slide" style={slideStylesWidthBackground}></div> */}
+          <img className="slide" src={slides[currentIndex]?.url} alt="" />
+          <div className="slide-title">{slides[currentIndex]?.title}</div>
+          <div className="page-container">
+            <input 
+              className="page-input"
+              maxLength={5}
+              type="number"
+              value={currentIndex+1}
+              onChange={(e) => handleChange(e)}
+            />/{slides.length}
+          </div>
         </div>
       </div>
     </div>
