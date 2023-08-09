@@ -205,7 +205,7 @@ export const getSlides = () => {
 
     Object.entries(smileCIDs).forEach(([smile, cid]) => {
       const url = `${path}/${cid}.png`;
-      console.log(url)
+      // console.log(url)
       slides.push({ url, title: smile });
     });
     return slides
