@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div style={{width: "100vw", height: "100vh"}}>
-      <h1>Chem Slider V1</h1>
+      <h1>Chem Slider V2 Sorted Demo</h1>
       <div style={containerStyles}>
         <ImageSlider slides={slides} />
       </div>
